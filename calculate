@@ -1,0 +1,22 @@
+#!/bin/bash 
+
+total=0
+
+while read -r line
+do
+  subtotal=0
+  weight=$(( $(($line / 3 )) - 2 ))
+  subtotal=$(( $subtotal + $weight))
+
+  fuel_weight=$(( $(($weight / 3 )) - 2 ))
+
+  while [[ $fuel_weight -gt 0 ]]
+  do
+    subtotal=$(( $subtotal + $fuel_weight))
+    fuel_weight=$(( $(($fuel_weight / 3 )) - 2 ))
+  done
+
+  total=$(($total + $subtotal))
+done < "./modules"
+
+echo $total
